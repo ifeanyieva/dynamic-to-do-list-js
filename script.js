@@ -3,6 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById("add-task-btn");
     const taskInput = document.getElementById("task-input");
     const taskList = document.getElementById("task-list");
+});
+
+    // Helper: save tasks to localStorage
+    function saveTasks() {
+        const tasks = [];
+        // Collect all <li> text content (without "Remove")
+        taskList.querySelectorAll("li").forEach(li => {
+            const text = li.firstChild.textContent; 
+            tasks.push(text);
+        });
+        localStorage.setItem("tasks", JSON.stringify(tasks));}
+    
 
     // Function to add a new task
     function addTask() {
@@ -18,6 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
             // Create a new list item
             const li = document.createElement("li");
             li.textContent = taskText;
+
+            // Helper: render a task on screen
+    function renderTask(taskText) {
+        const li = document.createElement("li");
+        li.textContent = taskText;
 
             // Create remove button
             const removeBtn = document.createElement("button");
@@ -47,6 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
             addTask();
         }
     });
+
+    // Load tasks from localStorage at startup
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+        JSON.parse(storedTasks).forEach(task => renderTask(task));
+    }
+
 
     // Invoke on page load
     addTask();
