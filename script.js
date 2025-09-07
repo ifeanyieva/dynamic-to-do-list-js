@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Load tasks from localStorage at startup
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-        JSON.parse(storedTasks).forEach(task => renderTask(task));
+    const loadTasks = localStorage.getItem("tasks");
+    if (loadTasks) {
+        JSON.parse(loadTasks).forEach(task => renderTask(task));
     }
 
 
